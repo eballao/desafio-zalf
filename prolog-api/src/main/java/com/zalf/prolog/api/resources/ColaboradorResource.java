@@ -19,7 +19,6 @@ public class ColaboradorResource {
 	
 	@GetMapping("/teste")
 	public List<Colaborador> listar(){
-		System.out.println("teste");
 		return colaboradorRepository.findAll();
 	}
 

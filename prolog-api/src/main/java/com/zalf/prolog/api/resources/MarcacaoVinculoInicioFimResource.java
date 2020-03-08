@@ -20,7 +20,6 @@ public class MarcacaoVinculoInicioFimResource {
 	
 	@GetMapping("/teste")
 	public List<MarcacaoVinculoInicioFim> listar(RelatorioFilter relatorioFilter){
-		System.out.println("teste");
 		
 		List<MarcacaoVinculoInicioFim> marcs = marcacaoVinculoInicioFimRepository.findAll();
 		
