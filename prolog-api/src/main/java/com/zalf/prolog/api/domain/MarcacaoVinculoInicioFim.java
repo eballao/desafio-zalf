@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -28,5 +30,13 @@ public class MarcacaoVinculoInicioFim implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cod_marcacao_fim")
 	private Marcacao marcacaoFim;
+	
+	@JsonIgnore
+	public boolean isValid() {
+		if(marcacaoInicio != null && marcacaoFim != null) {
+			return true;
+		}
+		return false;
+	}
 	
 }

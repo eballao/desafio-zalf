@@ -1,6 +1,5 @@
 package com.zalf.prolog.api.resources;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,7 @@ public class MarcacaoResource {
 	
 	@GetMapping("/teste")
 	public List<Marcacao> listar(RelatorioFilter relatorioFilter){
-		System.out.println("teste:  " + LocalDateTime.now());
-		return marcacaoRepository.filtrar(relatorioFilter);
+		return marcacaoRepository.findAll();
 	}
 
 }

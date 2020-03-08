@@ -2,10 +2,11 @@ package com.zalf.prolog.api.repository.filter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zalf.prolog.api.utils.DataUtils;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,21 +17,24 @@ public class RelatorioFilter {
 	
 	private String cpf;
 	
+	@JsonIgnore
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataInicio;
 	
+	@JsonIgnore
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataTermino;
 	
-	public LocalDateTime getDataInicioConvertida() {
-		LocalDateTime dataIni = getDataInicio().atStartOfDay().atZone(ZoneId.of("America/Sao_Paulo")).toLocalDateTime();
-		
-		ZonedDateTime teste = dataIni.atZone(ZoneId.of("UTC"));
-		
-		LocalDateTime dataUtc = dataIni.atZone(ZoneId.of("UTC")).toLocalDateTime();
-		
-		
-		return dataUtc;
+	public String getDataInicioFormatada() {
+		return DataUtils.getLocalDateFormatString(dataInicio, "dd-MM-yyyy");
 	}
-
+	
+	public String getDataTerminoFormatada() {
+		return DataUtils.getLocalDateFormatString(dataTermino, "dd-MM-yyyy");
+	}
+	
+	public String getDataEmissaoRelatorio() {
+		return DataUtils.getLocalDateTimeFormatString(LocalDateTime.now(), "dd-MM-yyyy HH:mm:ss");
+	}
+	
 }
